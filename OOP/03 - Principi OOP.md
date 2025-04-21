@@ -277,5 +277,5 @@ public class Esempio4
    Sono una SeicentoFamiliare e ho 6 posti */
 ```
 
-![](../+Immagini/OOP/04/Polymorphism.png)
+![](../+Immagini/OOP/03/Polymorphism.png)
 

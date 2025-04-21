@@ -107,7 +107,7 @@ Per usare l'I/O in Java usiamo l'incapsulamento. Consiste nella composizione di 
 2) Si crea un oggetto da una classe filtro. Si passa al costruttore l'oggetto sorgente - lo incapsuliamo.
 3) Volendo si possono incapsulare classi filtro in altre classi filtro in modo da ottenere tutte le funzionalità previste.
 
-![](../+Immagini/OOP/06/Encapsulation.png)
+![](../+Immagini/OOP/05/Encapsulation.png)
 
 ``` Java
 import java.io.*;

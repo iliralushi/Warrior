@@ -41,6 +41,8 @@ ADTdef Main
 - `cont.val++` è illegale. Possiamo agire solo con i metodi.
 - Se non vogliamo `cont.setVal(-1)` allora basta impostare un controllo.
 
+![](../+Immagini/OOP/01/OOP.png)
+
 **Protezione dei Dati**
 - Con la protezione dei dati possiamo agire sugli attributi solo con i metodi.
 - Il controllo è hard-coded nella operazione dell'entità. È facile da ripescare e da modificare.

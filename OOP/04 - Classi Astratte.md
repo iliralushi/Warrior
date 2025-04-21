@@ -161,7 +161,7 @@ public class MondoVeicoli
 }
 
 /* $ java MondoVeicoli
-   OUTPUT: Fiat ZZ999XX, un camion, si muove sulla terra e trasporta         merci.
+   OUTPUT: Fiat ZZ999XX, un camion, si muove sulla terra e trasporta                merci.
    Volvo AA111BB, un'auto, si muove sulla terra e trasporta persone. 
 */
 ```

@@ -6,7 +6,7 @@ Swing è una libreria di Java (evoluta da AWT) usata per realizzare GUI.
 - ***Swing:*** Disegna separatamente dal SO i suoi componenti grafici.
 
 **Componenti Swing**
-Non usano codice nativo quindi hanno più widgets. Il suo comportamento non dipende dal SO in uso. Swing definisce due componenti:
+Non usano codice nativo del sistema operativo quindi hanno più widgets. Il suo comportamento non dipende dal SO in uso. Swing definisce due componenti:
 - ***Leggeri:*** Disegnati da Swing stesso.
 - ***Pesanti:*** Hanno bisogno un peer (componente nativo) dell'SO per funzionare tipo `JFrame.`
 
@@ -88,7 +88,7 @@ public class MyFrame extends JFrame
 	
 	public MyFrame(String titolo)
 	{
-		super(titolo);
+		super(titolo); // Costruttore di JFrame originale
 		setBounds(200, 100, 300, 150);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
@@ -157,7 +157,7 @@ public class MyPanel extends JPanel
 	// Uso il costruttore del pannello stesso per aggiungere un JLabel
 	public MyPanel()
 	{
-		super();
+		super(); // Inizializzo JPanel
 		JLabel l = new JLabel("Etichetta");
 		add(l);
 	}
@@ -203,6 +203,8 @@ Quando premuto viene generato un evento di classe `ActionEvent.` Esso viene invi
 
 **JButton - Esempio**
 Applicazione con un `JLabel` ed un `JButton.` Ogni volta che il pulsante viene premuto l'etichetta cambia da Tizio a Caio e viceversa.
+
+![](../+Immagini/OOP/06/AppExample.png)
 
 ``` Java
 import java.awt.event.*;
@@ -259,3 +261,110 @@ public class Es5Swing
 	}
 }
 ```
+
+**JButton - Variante Esempio**
+Non definiamo come ascoltatore degli eventi il bottone stesso.
+- Creiamo una classe scollegata dalla GUI che fa da ascoltatore. Separiamo la gestione dell'evento con la implementazione del pannello.
+
+``` Java
+import java.awt.event.*;
+import javax.swing.*;
+
+public class EventListener implement ActionListener
+{
+	private JLabel l;
+	
+	/* Costruttore con parametro una JLabel, quella su cui l'oggetto andrà
+	   ad agire. */
+	
+	public EventListener(JLabel label)
+	{
+		l = label;
+	}
+	
+	public void actionPerformed(ActionEvent e)
+	{
+		if (l.getText().equals("Tizio"))
+			l.setText("Caio");
+		else
+			l.setText("Tizio");
+	}
+}
+```
+
+``` Java
+public class MyPanel extends JPanel
+{
+	public Es8Panel()
+	{
+		super();
+		JLabel l = new JLabel("Tizio");
+		add(l);
+		
+		JButton b = new JButton("Tizio/Caio");
+		
+		/* Crea un oggetto di tipo EventListener e lo imposta come
+		   ascoltatore degli eventi del bottone. */
+		
+		b.addActionListener(new EventListener(l));
+		add(b);
+	}
+}
+```
+
+**JButton - Gestione + Pulsanti**
+- Un approccio è usare lo stesso listener per tutti i bottoni. È più semplice ma rende il programma meno modulare e riutilizzabile.
+- Un secondo approccio è creare un listener per ogni bottone. Più complesso, molto più modulare.
+
+> ***Esempio:*** Supponiamo di avere il programma di prima ma con due bottoni: uno cambia il nome della label a "Tizio" e l'altro a "Caio."
+
+``` Java
+public void actionPerformed(ActionEvent e)
+{
+	String nome = e.getActionCommand();
+	
+	if (nome.equals("Tizio"))
+		l.setText("Tizio");
+		
+	if (nome.equals("Caio"))
+		l.setText("Caio");
+}
+```
+
+``` Java
+public void actionPerformed(ActionEvent e)
+{
+	Object pulsantePremuto = e.getSource();
+	
+	if (pulsantePremuto == Button1)
+		l.setText("Tizio");
+	
+	if (pulsantePremuto == Button2)
+		l.setText("Caio");
+}
+```
+
+Abbiamo due metodi di riconoscere chi ha generato l'evento.
+- `getActionCommand():` Restituisce una stringa associata all'evento. Di default è la stringa del bottone ma può essere impostata tramite `setActionCommand().`
+- `getSource():` Restituisce il riferimento all'oggetto che ha generato l'evento.
+
+**Eventi di Finestra**
+Gli eventi di finestra sono gestiti dall'interfaccia `WindowListener.` L'interfaccia comprende molti metodi che vanno implementati anche se non tutti vengono usati - basta usare un blooco di istruzioni vuoto.
+- Solitamente gestiti dal SO tranne `windowClosing()` che nasconde la finestra ma non termina l'applicazione. È necessario creare un ascoltatore che chiami `System.exit()` per terminare l'applicazione.
+- Possiamo personalizzare la chiusura dell'applicazione - possiamo per esempio creare una finestra che chiede conferma se vogliamo chiudere l'applicazione.
+
+**Classi Swing - JTextField**
+`JTextField` è un campo di testo usabile per scrivere e vedere una riga di testo.
+- Il campo di testo può essere editabile o no. Il testo è accessibile con `get/setText().`
+
+**JTextField - Eventi**
+- `DocumentEvent:` Se cambiamo il testo contenuto (per esempio lettera per lettera) nel `JTextField` generiamo questo evento.
+- `ActionEvent:` Se dobbiamo solo registrare i cambiamenti del testo (premere INVIO) generiamo questo evento.
+
+**Classi Swing - JCheckBox**
+`JCheckBox` implementa la casella di opzione che può essere selezionata o deselezionata.
+- Lo stato è verificabile tramite `isSelected()` e modificabile con `setSelected().`
+
+**JCheckBox - Eventi**
+- `ItemEvent:` Gestito dal `ItemListener.` L'interfaccia implementa il metodo `itemStateChanged (ItemEvent e)` che deve essere implementato. In caso di più `JCheckBox` selezionabili si usa il metodo `e.getItemSelectable()` che restituisce il riferimento all'oggetto che ha generato l'evento. Si preferisce gestire questo evento.
+- `ActionEvent:` Come per ogni pulsante.
