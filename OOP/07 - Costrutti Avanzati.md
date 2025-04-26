@@ -1,6 +1,6 @@
 **Classi Wrapper**
 Le classi wrapper servono per poter usare i tipi primitivi come oggetti.
-- In Java non tutto è object-oriented.
+- In Java non tutto è OO!
 
 ``` Java
 Vector v = new Vector();

@@ -5,11 +5,11 @@ Abbiamo bisogno di un paradigma di programmazione che offre:
 ``` Java
 ADTdef Contatore
 {
-	// Attributi
+	// Attributi.
 	
 	int val;
 	
-	// Operazioni
+	// Operazioni.
 	
 	void setVal(int newVal) {val = newVal;}
 	void inc() {val++;}
@@ -22,14 +22,14 @@ ADTdef Main
 {
 	main()
 	{
-		Contatore cont;  // Istanzio contatore 1
-		Contatore cont2; // Istanzio contatore 2
+		Contatore cont;  // Istanzio contatore 1.
+		Contatore cont2; // Istanzio contatore 2.
 		
-		cont.setVal(0);  // Setto contatore 1
-		cont2.setVal(0); // Setto contatore 2
+		cont.setVal(0);  // Setto contatore 1.
+		cont2.setVal(0); // Setto contatore 2.
 		
-		cont.inc();      // Aumento valore del contatore 1 di 1
-		cont2.inc();     // Aumento valore del contatore 2 di 1
+		cont.inc();      // Aumento valore del contatore 1 di 1.
+		cont2.inc();     // Aumento valore del contatore 2 di 1.
 		
 		/* Non vado a toccare il valore del primo contatore con il
 		   secondo incremento. */
