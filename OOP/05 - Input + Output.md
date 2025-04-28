@@ -351,4 +351,4 @@ public class Read
 
 **Fine Stream**
 - Lo rileviamo checkando il valore di ritorno di `read()` - se raggiungiamo `-1` siamo nell'EOF quindi non abbiamo più byte da leggere.
-- Usiamo il metodo `ready()` che controlla quanti caratteri abbiamo da leggere. Restituisce true in caso positivo. Non funziona con tutti gli stream di caratteri.
+- Usiamo il metodo `ready()` che controlla quanti caratteri abbiamo da leggere. Restituisce `true` in caso positivo. Non funziona con tutti gli stream di caratteri.

@@ -102,4 +102,40 @@ Sia `ArrayList` che `Vector` si basano su array. Hanno ridimensionamento dinamic
 - `TreeMap:` Implementazione di `SortedMap` - la struttura interna è un albero - costo computazionale alto.
 
 **Iterator**
+`Iterator` fornisce un modo indipendente dalla struttura dati per scorrerla. È una operazione comune specialmente nelle strutture dati che implementano `Collection.`
+1) Un iteratore tiene traccia dell'ultimo elemento visitato.
+2) Si sposta sul prossimo elemento dopo ogni lettura se esistono elementi da leggere.
 
+**Iterator - Interfaccia**
+`Iterator<E>` definisce due metodi principali:
+- `boolean hasNext():` se esiste un altro elemento ritorna `true.`
+- `E next():` restituisce il prossimo elemento.
+
+Successivamente sono stati aggiunti altri due metodi:
+- `default void remove():` rimove l'oggetto corrente.
+- `default void forEachRemaining(Consumer<? super E> action):` svolge una azione su tutti gli elementi rimanenti.
+
+**Iterator - Iterable**
+`Iterable<E>` è l'interfaccia da implementare se una struttura dati vuole usare un iteratore.
+- `Iterable<E>` mette a disposizione il metodo `Iterator<E> iterator()` che restituisce un iteratore ad una struttura dati.
+
+``` Java
+Collection<Person> persons = new LinkedList<Person>();
+Iterator<Person> i = persons.iterator();
+
+while (i.hasNext())                           
+{
+	Person p = i.next();
+	System.out.println(p);
+}
+
+/*
+for (Person p : persons)
+	System.out.println(p);
+*/
+```
+
+> È pericoloso modificare una struttura dati che sta venendo iterata! Si ha undefined behaviour! Bisogna usare i metodi di `Iterator/ListIterator` come `add()` e `remove().`
+
+
+**Confrontare per Ordinare**
